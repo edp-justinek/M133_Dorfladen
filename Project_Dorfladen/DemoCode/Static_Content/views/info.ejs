@@ -1,0 +1,10 @@
+<%- await include('views/header.ejs', { title: 'Info' }) %>
+<h1>Info</h1>
+<p>Hello <%= firstName %></p>
+<p>Your items:</p>
+<ul>
+    <% for (let i = 0; i < itemList.length; i++) {  %>
+        <li><%= itemList[i] %></li>
+    <% } %>
+</ul>
+<%- await include('views/footer.ejs') %>

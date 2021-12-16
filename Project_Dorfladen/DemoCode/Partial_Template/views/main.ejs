@@ -1,0 +1,8 @@
+<%- await include('views/header.ejs', { title: 'Welcome' }) %>
+<h1>Welcome</h1>
+<p>Please enter your first name</p>
+<form action="/info" method="post">
+    <input type="text" name="first-name">
+    <input type="submit" value="Submit">
+</form>
+<%- await include('views/footer.ejs') %>

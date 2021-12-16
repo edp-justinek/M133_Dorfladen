@@ -1,0 +1,8 @@
+Server starten:
+deno run --inspect-brk --allow-all filename.js
+denon run --inspect-brk --allow-all filename.js
+
+Chrome starten:
+chrome://inspect
+--> inspect wählen
+--> localhost:8000 in einem neuen Tab auswählen

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+</head>
+<body>
+    <h1>Input</h1>
+    <form action="" method="post">
+        <p><input type="text" name="username" placeholder="Username"></p>
+        <p><input type="text" name="email" placeholder="Email"></p>
+        <p><input type="text" name="age" placeholder="Age"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <%
+        if (errors.length > 0) {
+    %>
+            <ul>
+
+    <%
+                for (const [key, value] of errors.entries()) {
+    %>
+                    <li><%= value %></li>
+    <%
+                }
+    %>
+            </ul>
+    <%
+        }
+    %>
+</body>
+</html>
