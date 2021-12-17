@@ -9,19 +9,19 @@ const router = new Router();
 router.get("/", async (context) => {
     try {
         context.response.body = await renderFileToString(Deno.cwd() + 
-        "/views/main.ejs", { });
+        "./views/main.ejs", { });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
     }
 });
 
-router.post("/info", async (context) => {
+router.post("/product_detail", async (context) => {
     try {
         const body = await context.request.body().value;
         const fname = body.get("first-name");
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/info.ejs", { firstName: fname, itemList: items });
+            "./views/product_detail.ejs", { firstName: fname, itemList: items });
         context.response.type = "html";
     
     } catch (error) {
