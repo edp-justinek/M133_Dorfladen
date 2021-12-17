@@ -1,6 +1,6 @@
 'use strict';
-import  { Application, Router, send } from "./controller/deps.ts";
-import { renderFileToString } from './controller/deps.js';
+import  { Application, Router, send } from "./deps.js";
+import { renderFileToString } from './deps.js';
 
 const items = ["Keyboard", "Monitor", "Mouse"];
 
@@ -9,7 +9,7 @@ const router = new Router();
 router.get("/", async (context) => {
     try {
         context.response.body = await renderFileToString(Deno.cwd() + 
-        "views/main.ejs", { });
+        "/views/main.ejs", { });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
@@ -21,7 +21,7 @@ router.post("/product_detail", async (context) => {
         const body = await context.request.body().value;
         const fname = body.get("first-name");
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "views/product_detail.ejs", { firstName: fname, itemList: items });
+            "/views/product_detail.ejs", { firstName: fname, itemList: items });
         context.response.type = "html";
     
     } catch (error) {
@@ -37,7 +37,7 @@ app.use(router.allowedMethods());
 // Steht diese Middleware vor den Routes, werden die Routes nicht verarbeitet!
 app.use(async (context) => {
     await send(context, context.request.url.pathname, {
-        root: `${Deno.cwd()}/styles`,
+        root: `${Deno.cwd()}/static`,
     });
 }); 
 
