@@ -1,0 +1,7 @@
+body {
+    font-variant: small-caps;
+}
+.products > img {
+    width: 20%;
+    height: 20%;
+}

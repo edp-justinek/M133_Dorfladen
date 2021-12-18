@@ -37,7 +37,7 @@ app.use(router.allowedMethods());
 // Steht diese Middleware vor den Routes, werden die Routes nicht verarbeitet!
 app.use(async (context) => {
     await send(context, context.request.url.pathname, {
-        root: `${Deno.cwd()}/styles`,
+        root: `${Deno.cwd()}/assets`,
     });
 }); 
 
