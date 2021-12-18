@@ -20,6 +20,7 @@ router.post("/product_detail", async (context) => {
     try {
         const body = await context.request.body().value;
         const fname = body.get("first-name");
+        
         context.response.body = await renderFileToString(Deno.cwd() + 
             "/views/product_detail.ejs", { firstName: fname, itemList: items });
         context.response.type = "html";
