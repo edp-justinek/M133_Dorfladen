@@ -2,7 +2,7 @@
 
 Deno starten:
 
-denon run --allow-all using_ejs.js
+denon run --allow-all controller/using_ejs.js
 
 
 Anleitung:
