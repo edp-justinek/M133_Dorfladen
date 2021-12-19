@@ -2,6 +2,6 @@ body {
     font-variant: small-caps;
 }
 .products > img {
-    width: 20%;
-    height: 20%;
+    width: 50%;
+    height: 60%;
 }
