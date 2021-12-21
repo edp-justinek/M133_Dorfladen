@@ -28,6 +28,19 @@
     </div>
     
 </form>
+<script>
 
+    fetch("products.json")
+    .then(function(resp){
+        return resp.json();
+    })
+    .then(function(data){
+        console.log(data[0].productName);
+        console.log(data[1].productName);
+        console.log(data[2].productName);
+    })
+
+
+</script>
 
 <%- await include('views/footer.ejs') %>
