@@ -2,6 +2,10 @@
 import  { Application, Router, send } from "./deps.js";
 import { renderFileToString } from './deps.js';
 
+
+//import { readJson } from "https://deno.land/std/fs/mod.ts";
+//const items = await readJson("./products.json");
+
 const items = ["Keyboard", "Monitor", "Mouse"];
 
 const router = new Router();

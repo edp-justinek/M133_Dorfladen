@@ -5,3 +5,12 @@ body {
     width: 50%;
     height: 60%;
 }
+
+.basketModal {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    float: right;
+    background-color: white;
+    height: 100vh;
+}

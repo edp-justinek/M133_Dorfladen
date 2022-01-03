@@ -6,6 +6,22 @@
     <input type="submit" value="Submit">
 </form>
 
+<script>
+    let products = [];
+
+    fetch("products.json")
+    .then(function(resp){
+        return resp.json();
+    })
+    .then(function(data){
+        products = data;
+        console.log(products[0].productName)
+    })
+</script>
+
+
+
+
 <form action="/prduct_detail" method="post">
     <div class="row">
         <div class="col">
@@ -35,6 +51,7 @@
     </div>
     
 </form>
+<<<<<<< HEAD
 
 <script>
     let productName;
@@ -61,4 +78,7 @@
 
 </script>
 
+=======
+<%- await include('views/basket.ejs') %>
+>>>>>>> f4a8bcf8497e442273080d2569fbc12c912d5cf7
 <%- await include('views/footer.ejs') %>
