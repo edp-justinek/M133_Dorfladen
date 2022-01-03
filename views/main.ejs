@@ -9,6 +9,9 @@
 <form action="/prduct_detail" method="post">
     <div class="row">
         <div class="col">
+            <div>
+                <h3>Käse</h3>
+            </div>
             <div class="products">
                 <img src="appenzeller.jpg" alt="appenzeller">
             </div>
@@ -17,29 +20,44 @@
             </div>
         </div>
         <div class="col">
+            <div>
+                <h3>Eier</h3>
+            </div>
             <div class="products">
                 <img src="eier.jpg" alt="eier">
             </div>
             <div>
                 <input class="btn btn-primary" type="sumit" name="eier" value="CHF 10.00">
+
             </div>
         </div>
        
     </div>
     
 </form>
+
 <script>
+    let productName;
+    let productPrice;
+    let imageName;
+    let specialOffer;
+    let description;
+
 
     fetch("products.json")
     .then(function(resp){
         return resp.json();
     })
     .then(function(data){
-        console.log(data[0].productName);
-        console.log(data[1].productName);
-        console.log(data[2].productName);
-    })
+        for(i = 0; i < 11; i++){
+            productName = console.log(data[i].productName);
+            productPrice = console.log(data[i].normalPrice);
+            imageName = console.log(data[i].imageName);
+            specialOffer = console.log(data[i].specialOffer);
+            description = console.log(data[i].description);
+        }
 
+    })
 
 </script>
 
