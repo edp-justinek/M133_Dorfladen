@@ -6,35 +6,16 @@
     <input type="submit" value="Submit">
 </form>
 
-
 <form action="/prduct_detail" method="post">
     <div class="row">
         <div class="col">
-            <div>
-                <h3>Käse</h3>
-            </div>
-            <div class="products">
-                <img src="appenzeller.jpg" alt="appenzeller">
-            </div>
+            <div id="productName"><h3>Käse</h3></div>
+            <div id="productImg" class="products"><img src="appenzeller.jpg" alt=""></div>
             <div>
                 <input class="btn btn-primary" type="sumit" name="appenzeller" value="CHF 10.00">
             </div>
-        </div>
-        <div class="col">
-            <div>
-                <h3>Eier</h3>
-            </div>
-            <div class="products">
-                <img src="eier.jpg" alt="eier">
-            </div>
-            <div>
-                <input class="btn btn-primary" type="sumit" name="eier" value="CHF 10.00">
-
-            </div>
-        </div>
-       
-    </div>
-    
+        </div>     
+    </div>    
 </form>
 
 
@@ -46,23 +27,38 @@
     let description;
 
 
-    fetch("products.json")
+
+
+/*     fetch("products.json")
     .then(function(resp){
         return resp.json();
     })
     .then(function(data){
         for(i = 0; i < 11; i++){
-            productName = console.log(data[i].productName);
-            productPrice = console.log(data[i].normalPrice);
-            imageName = console.log(data[i].imageName);
-            specialOffer = console.log(data[i].specialOffer);
-            description = console.log(data[i].description);
-        }
+            productName = data[i].productName;
+            productPrice = data[i].normalPrice;
+            imageName = data[i].imageName;
+            specialOffer = data[i].specialOffer;
+            description = data[i].description;
 
-    })
+            const title = document.querySelector("#productName");
+            const h3 = document.createElement("h3");
+            h3.textContent = `${productName}`;
+            title.appendChild(h3); */
+
+
+            //funktioniert aber sieht kacke aus
+            
+            //const productImg = document.querySelector("#productImg");
+            //const img = document.createElement("img");
+            //img.setAttribute("src",imageName);
+            //img.setAttribute("width", "150");
+            //img.setAttribute("height", "150");
+            //productImg.appendChild(img);
+        //}
+   // })
 
 </script>
-
 
 <%- await include('views/basket.ejs') %>
 <%- await include('views/footer.ejs') %>

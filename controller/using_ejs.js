@@ -1,6 +1,10 @@
 'use strict';
-import  { Application, Router, send } from "./deps.js";
+import  { Application, Router, send, Session } from "./deps.js";
 import { renderFileToString } from './deps.js';
+
+// Session konfigurieren und starten
+const session = new Session({ framework: "oak" });
+await session.init();
 
 
 //import { readJson } from "https://deno.land/std/fs/mod.ts";
