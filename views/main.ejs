@@ -1,68 +1,17 @@
 <%- await include('views/header.ejs', { title: 'Welcome' }) %>
 
-<!--
-<h1>Welcome</h1>
-<p>Please enter your first name</p>
-<form action="/product_detail" method="post">
-    <input type="text" name="first-name">
-    <input type="submit" value="Submit">
-</form>
--->
-
 <form action="/prduct_detail" method="post">
     <div class="row">
         <h1>Products</h1>
         <% for (let i = 0; i < product.length; i++) {  %>
             <div class="col">
                 <div><h3><%= product[i].productName %></h3></div>
-                <div class="products"><img src="<%= product[i].imageName %>" alt="<%= product[i].productName %>"></div>
+                <div><a href="/product_detail/<%= product[i].id %>" class="products"><img src="<%= product[i].imageName %>" alt="<%= product[i].productName %>"></a></div>
                 <div><input class="btn btn-primary" type="sumit" name="<%= product[i].productName %>" value="CHF <%= product[i].normalPrice.toFixed(2) %>"></div>
             </div>
         <% } %>
     </div>    
 </form>
-
-
-<script>
-    let productName;
-    let productPrice;
-    let imageName;
-    let specialOffer;
-    let description;
-
-
-
-
-/*     fetch("products.json")
-    .then(function(resp){
-        return resp.json();
-    })
-    .then(function(data){
-        for(i = 0; i < 11; i++){
-            productName = data[i].productName;
-            productPrice = data[i].normalPrice;
-            imageName = data[i].imageName;
-            specialOffer = data[i].specialOffer;
-            description = data[i].description;
-
-            const title = document.querySelector("#productName");
-            const h3 = document.createElement("h3");
-            h3.textContent = `${productName}`;
-            title.appendChild(h3); */
-
-
-            //funktioniert aber sieht kacke aus
-            
-            //const productImg = document.querySelector("#productImg");
-            //const img = document.createElement("img");
-            //img.setAttribute("src",imageName);
-            //img.setAttribute("width", "150");
-            //img.setAttribute("height", "150");
-            //productImg.appendChild(img);
-        //}
-   // })
-
-</script>
 
 <%- await include('views/basket.ejs') %>
 <%- await include('views/footer.ejs') %>
