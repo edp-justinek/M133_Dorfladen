@@ -7,7 +7,7 @@ import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 const session = new Session({ framework: "oak" });
 await session.init();
 
-const items = ["Keyboard", "Monitor", "Mouse"];0
+//const items = ["Keyboard", "Monitor", "Mouse"];0
 
 const p = await readJson('./assets/products.json');
 const products = readJsonSync('./assets/products.json');
@@ -26,11 +26,11 @@ router.get("/", async (context) => {
 
 router.post("/product_detail", async (context) => {
     try {
-        const body = await context.request.body().value;
-        const fname = body.get("first-name");
+        //const body = await context.request.body().value;
+        //const id = body.get(":id");
         
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/product_detail.ejs", { firstName: fname, itemList: items });
+            "/views/product_detail.ejs", { product: products });
         context.response.type = "html";
     
     } catch (error) {

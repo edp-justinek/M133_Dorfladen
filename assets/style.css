@@ -2,8 +2,12 @@ body {
     font-variant: small-caps;
 }
 .products > img {
-    width: 50%;
-    height: 60%;
+    width: 200px;
+    height: 200px; 
+}
+
+.products  {
+
 }
 
 .basketModal {
