@@ -1,20 +1,16 @@
 <%- await include('views/header.ejs', { title: 'product_detail' }) %>
 
 
+<!--  Die Website crashed jedes mal wenn man auf die Detail-Seite kommt. Jedoch gibt der Fehler aus, dass productName nicht gefunden wurde, der Browser dies jedoch darstellt...  -->
 <h1>Product Detail</h1>
-<form action="/prduct_detail" method="post">
 <div class="row">
-    <% for (let i = 0; i < product.length; i++) {  %>
         <div class="col">
-            <div><h3><%= product[0].productName %></h3></div>
-            <div><a href="/product_detail/<%= product[i].id %>" class="products"><img src="<%= product[i].imageName %>" alt="<%= product[i].productName %>"></a></div>
-            <div><p><%= product[i].description %></p></div>
-            <div><input class="btn btn-primary" type="sumit" name="<%= product[i].productName %>" value="CHF <%= product[i].normalPrice.toFixed(2) %>"></div>
+            <div><h3><%= product.productName %></h3></div>
+            <div><img src="<%= product.imageName %>" alt="<%= product.productName %>"></div>
+            <div><p><%= product.description %></p></div>
+            <div><input class="btn btn-primary" type="submit" name="<%= product.productName %>" value="CHF <%= product.normalPrice.toFixed(2) %>"></div>
         </div>
-    <% } %>
 </div>   
-</form> 
-
 
 <%- await include('views/basket.ejs') %>
 <%- await include('views/footer.ejs') %>

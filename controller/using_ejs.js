@@ -7,9 +7,6 @@ import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 const session = new Session({ framework: "oak" });
 await session.init();
 
-//const items = ["Keyboard", "Monitor", "Mouse"];0
-
-const p = await readJson('./assets/products.json');
 const products = readJsonSync('./assets/products.json');
 
 const router = new Router();
@@ -24,15 +21,19 @@ router.get("/", async (context) => {
     }
 });
 
-router.post("/product_detail", async (context) => {
+router.get("/product_detail/:id", async (context) => {
     try {
-        //const body = await context.request.body().value;
-        //const id = body.get(":id");
-        
-        context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/product_detail.ejs", { product: products });
-        context.response.type = "html";
+        let currentProduct;
+        for(let product of products) {
+            if(context.params.id == product.id) {
+                currentProduct = product;
+                console.log(currentProduct.id);
+            }
+        }
     
+        context.response.body = await renderFileToString(Deno.cwd() + 
+            "/views/product_detail.ejs", { product: currentProduct });
+        context.response.type = "html";
     } catch (error) {
         console.log(error);
     }
