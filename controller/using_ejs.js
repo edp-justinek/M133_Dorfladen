@@ -13,15 +13,38 @@ const router = new Router();
 
 router.get("/", async (context) => {
     try {
+        console.log(context.state.session.get("basketProducts"));
+
+        let basketProducts = await context.state.session.get("basketProducts")
         context.response.body = await renderFileToString(Deno.cwd() + 
-        "/views/main.ejs", { product: products });
+        "/views/main.ejs", { product: products, basketProducts: basketProducts });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
     }
 });
 
-router.get("/product_detail/:id", async (context) => {
+router.get("/addToBasket&id=:id", async (context) => {
+    try {
+        let currentProduct;
+        for(let product of products) {
+            if(context.params.id == product.id) {
+                currentProduct = product;
+            }
+        }
+
+        await context.state.session.set("basketProducts",{currentProduct});
+        let basketProducts = await context.state.session.get("basketProducts")
+
+        context.response.body = await renderFileToString(Deno.cwd() + 
+        "/views/main.ejs", { product: products, basketProducts: basketProducts });
+        context.response.type = "html";   
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.get("/product_detail&:id", async (context) => {
     try {
         let currentProduct;
         for(let product of products) {
@@ -30,9 +53,11 @@ router.get("/product_detail/:id", async (context) => {
                 console.log(currentProduct.id);
             }
         }
-    
+
+        let basketProducts = await context.state.session.get("basketProducts")
+
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/product_detail.ejs", { product: currentProduct });
+            "/views/product_detail.ejs", { product: currentProduct, basketProducts: basketProducts });
         context.response.type = "html";
     } catch (error) {
         console.log(error);
