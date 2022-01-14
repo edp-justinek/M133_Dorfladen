@@ -1,14 +1,21 @@
+
 <%- await include('views/header.ejs', { title: product.productName }) %>
 
-<h1>Product Detail</h1>
-<div class="row">
-        <div class="col">
-            <div><h3><%= product.productName %></h3></div>
-            <div><img src="<%= product.imageName %>" alt="<%= product.productName %>"></div>
-            <div><p><%= product.description %></p></div>
-            <div><a class="btn btn-primary" href="addToBasket&<%= product.id %>"  name="<%= product.productName %>">CHF <%= product.specialOffer.toFixed(2) %></a></div>
-        </div>
-</div>   
+<div>
+    <h1>Product Detail</h1>
+    <div>
+        <h3><%= product.productName %></h3>
+    </div>
+    <div>
+        <img class="picture" src="<%= product.imageName %>" alt="<%= product.productName %>"></div>
+    <div>
+        <p><%= product.description %></p>
+    </div>
+    <div>
+        <a class="btn btn-primary" href="addToBasket&<%= product.id %>"  name="<%= product.productName %>">CHF <%= product.specialOffer.toFixed(2) %></a>
+        <span class="specialOffer">CHF <%= product.normalPrice.toFixed(2) %></span>
+    </div>
+</div>
 
 <%- await include('views/basket.ejs', { basket: basket }) %>
 <%- await include('views/footer.ejs') %>

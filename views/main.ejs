@@ -1,11 +1,11 @@
 <%- await include('views/header.ejs', { title: 'Welcome' }) %>
 
 <div class="row">
-    <h1>Products</h1>
+    <h1>Produkte</h1>
     <% for (let selectedProduct of product) {  %>
-        <div class="col">
+        <div class="col product">
             <div><h3><%= selectedProduct.productName %></h3></div>
-            <div><a href="/product_detail&<%= selectedProduct.id %>" class="products"><img src="<%= selectedProduct.imageName %>" alt="<%= selectedProduct.productName %>"></a></div>
+            <div><a href="/product_detail&<%= selectedProduct.id %>" class="products"><img class="picture" src="<%= selectedProduct.imageName %>" alt="<%= selectedProduct.productName %>"></a></div>
             <div>
                 <a class="btn btn-primary" href="addToBasket&<%= selectedProduct.id %>"  name="<%= selectedProduct.productName %>">CHF <%= selectedProduct.specialOffer.toFixed(2) %></a>
                 <span class="specialOffer">CHF <%= selectedProduct.normalPrice.toFixed(2) %></span>
