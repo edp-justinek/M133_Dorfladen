@@ -7,13 +7,17 @@
             <h4 class="pl-2 pt-3 pb-2"><b>Warenkorb</b></h4>
 
             <div>
-            
+                <% for(let product of basket) { %>
+                <p><%= product.title %></p>
+                <p><%= product.price %></p>
+                <% } %>
             </div>
 
             <button class="btn btn-md btn-primary" onclick="">Zur Kasse</button>
-            
+
             <div class="w-100">
-                <a href="/shop/killWarenkorb" onclick="javascript:return confirm('Alle Artikel im Warenkorb löschen?')" title="Warenkorb löschen" class="btn btn-md">Warenkorb löschen</a>
+                <a href="/shop/killWarenkorb" onclick="javascript:return confirm('Alle Artikel im Warenkorb löschen?')"
+                    title="Warenkorb löschen" class="btn btn-md">Warenkorb löschen</a>
             </div>
             <div class="w-100">
                 <button class="btn btn-md" onclick="BasketClose()">Weiter einkaufen</button>
@@ -25,11 +29,5 @@
 <script>
     function BasketClose() {
         document.getElementById("basket").style.display = "none";
-    }
-
-    window.onload = function () { 
-        if (window.location.href.indexOf("&Id") > -1) {
-            document.getElementById("basket").style.display = "block";
-        }   
     }
 </script>

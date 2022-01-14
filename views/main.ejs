@@ -1,17 +1,15 @@
 <%- await include('views/header.ejs', { title: 'Welcome' }) %>
 
-<form action="/prduct_detail" method="post">
-    <div class="row">
-        <h1>Products</h1>
-        <% for (let selectedProduct of product) {  %>
-            <div class="col">
-                <div><h3><%= selectedProduct.productName %></h3></div>
-                <div><a href="/product_detail&<%= selectedProduct.id %>" class="products"><img src="<%= selectedProduct.imageName %>" alt="<%= selectedProduct.productName %>"></a></div>
-                <div><input class="btn btn-primary" type="submit" name="<%= selectedProduct.productName %>" value="CHF <%= selectedProduct.normalPrice.toFixed(2) %>"></div>
-            </div>
-        <% } %>
-    </div>    
-</form>
+<div class="row">
+    <h1>Products</h1>
+    <% for (let selectedProduct of product) {  %>
+        <div class="col">
+            <div><h3><%= selectedProduct.productName %></h3></div>
+            <div><a href="/product_detail&<%= selectedProduct.id %>" class="products"><img src="<%= selectedProduct.imageName %>" alt="<%= selectedProduct.productName %>"></a></div>
+            <div><a class="btn btn-primary" href="addToBasket&<%= selectedProduct.id %>"  name="<%= selectedProduct.productName %>">CHF <%= selectedProduct.specialOffer.toFixed(2) %></a></div>
+        </div>
+    <% } %>
+</div>    
 
-<%- await include('views/basket.ejs') %>
+<%- await include('views/basket.ejs', { basket: basket }) %>
 <%- await include('views/footer.ejs') %>

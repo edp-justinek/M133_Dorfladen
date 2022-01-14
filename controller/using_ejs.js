@@ -1,7 +1,7 @@
 'use strict';
 import  { Application, Router, send, Session } from "./deps.js";
 import { renderFileToString } from './deps.js';
-import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
+import { readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 
 // Session konfigurieren und starten
 const session = new Session({ framework: "oak" });
@@ -11,34 +11,34 @@ const products = readJsonSync('./assets/products.json');
 
 const router = new Router();
 
+let basket = [];
+
 router.get("/", async (context) => {
     try {
-        console.log(context.state.session.get("basketProducts"));
 
-        let basketProducts = await context.state.session.get("basketProducts")
+        if(await context.state.session.get("basketProducts") !== undefined){
+            basket = await context.state.session.get("basketProducts")
+        } 
+
+        console.log(basket);
+
         context.response.body = await renderFileToString(Deno.cwd() + 
-        "/views/main.ejs", { product: products, basketProducts: basketProducts });
+        "/views/main.ejs", { product: products, basket: basket });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
     }
 });
 
-router.get("/addToBasket&id=:id", async (context) => {
+router.get("/addToBasket&:id", async (context) => {
     try {
-        let currentProduct;
-        for(let product of products) {
-            if(context.params.id == product.id) {
-                currentProduct = product;
-            }
-        }
+      
+        let currentProduct = getSelectedProduct(context.params.id);
 
-        await context.state.session.set("basketProducts",{currentProduct});
-        let basketProducts = await context.state.session.get("basketProducts")
+        basket.push({title: currentProduct.productName, price: currentProduct.specialOffer})
+        await context.state.session.set("basketProducts", basket);
 
-        context.response.body = await renderFileToString(Deno.cwd() + 
-        "/views/main.ejs", { product: products, basketProducts: basketProducts });
-        context.response.type = "html";   
+        context.response.redirect("/");
     } catch (error) {
         console.log(error);
     }
@@ -46,23 +46,28 @@ router.get("/addToBasket&id=:id", async (context) => {
 
 router.get("/product_detail&:id", async (context) => {
     try {
-        let currentProduct;
-        for(let product of products) {
-            if(context.params.id == product.id) {
-                currentProduct = product;
-                console.log(currentProduct.id);
-            }
-        }
 
-        let basketProducts = await context.state.session.get("basketProducts")
+        let currentProduct = getSelectedProduct(context.params.id);
+        
+        if(await context.state.session.get("basketProducts") !== undefined){
+            basket = await context.state.session.get("basketProducts")
+        } 
 
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/product_detail.ejs", { product: currentProduct, basketProducts: basketProducts });
+            "/views/product_detail.ejs", { product: currentProduct, basket: basket });
         context.response.type = "html";
     } catch (error) {
         console.log(error);
     }
 });
+
+function getSelectedProduct(id) {
+    for(let product of products) {
+        if(id == product.id) {
+            return product;
+        }
+    }
+}
 
 const app = new Application();
 
