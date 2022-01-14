@@ -5,9 +5,15 @@ body {
     width: 200px;
     height: 200px; 
 }
+.col{
+    margin: 25px 5px;
+    text-align: center;
+}
 
-.products  {
-
+.specialOffer  {
+    color: red;
+    text-decoration: line-through;
+    margin-left: 10px;
 }
 
 .basketModal {
