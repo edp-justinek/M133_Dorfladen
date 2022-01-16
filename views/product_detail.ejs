@@ -5,8 +5,10 @@
         <div class="col">
             <div><h3><%= product.productName %></h3></div>
             <div><img src="<%= product.imageName %>" alt="<%= product.productName %>"></div>
+            </div>
+            <div class="col">
             <div><p><%= product.description %></p></div>
-            <div><a class="btn btn-primary" href="addToBasket&<%= product.id %>"  name="<%= product.productName %>">CHF <%= product.specialOffer.toFixed(2) %></a></div>
+            <div><a class="btn btn-primary" href="addToBasket&<%= product.id %>"  name="<%= product.productName %>">Im Warenkorb hinzufügen für CHF <%= product.specialOffer.toFixed(2) %></a></div>
         </div>
 </div>   
 
