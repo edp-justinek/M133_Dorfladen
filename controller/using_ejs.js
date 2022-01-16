@@ -93,6 +93,8 @@ router.get("/product_detail&:id", async (context) => {
 
 router.get("/kasse_login", async (context) => {
     try {
+
+
         context.response.body = await renderFileToString(Deno.cwd() + 
             "/views/kasse_login.ejs", { product: products, basket: basket });
         context.response.type = "html";           
