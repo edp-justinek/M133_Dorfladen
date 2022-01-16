@@ -56,6 +56,10 @@ body {
     cursor: pointer;
 }
 
+.shopping_cart {
+    cursor: pointer;
+}
+
 #basket {
     background-color: rgba(0, 0, 0, 0.2);
 }

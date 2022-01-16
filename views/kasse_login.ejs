@@ -1,28 +1,49 @@
 
 <%- await include('views/header.ejs', { title: product.productName }) %>
 
-<div>
+<div class="row">
+
     <h1>Kasse - Login</h1>
 
-    <form action="">
-        <div>
-            <label for="vorname">Vorname: </label><br>
-            <input type="text" id="vorname" required>
-        </div>
-        <div>
-            <label for="nachname">Nachname: </label><br>
-            <input type="text" id="nachname" required>
-        </div>
-        <div>
-            <label for="email">E-Mail: </label><br>
-            <input type="email" id="email" required> 
-        </div>
+    <div class="col-6">
+        <h3 class="pb-2"><b>Warenkorb</b></h3>
+
+        <% for(let product of basket) { %>
+            <% overallPrice += product.price %>
+            <div class="mb-3 basketProducts">
+                <h4><%= product.title %></h4>
+                <div>Anzahl: &emsp; <%= product.quantity %></div>
+                <div>Preis: &emsp;&emsp; <%= product.price.toFixed(2) %></div>
+            </div>
+    
+        <% } %>
+    
+        <div>Total: <%= overallPrice.toFixed(2) %></div>
         <br>
-        <div>
-            <submit  class="btn btn-md btn-primary"><a class="kassBtn" href="/">Einkauf Abschliessen</a></button>
-        </div>
-    </form>
+    </div>
+
+    <div class="col-6">
+        <h3 class="pb-2"><b>Login</b></h3>
+        <form action="">
+            <div>
+                <label for="vorname">Vorname: </label><br>
+                <input type="text" id="vorname" required>
+            </div>
+            <div>
+                <label for="nachname">Nachname: </label><br>
+                <input type="text" id="nachname" required>
+            </div>
+            <div>
+                <label for="email">E-Mail: </label><br>
+                <input type="email" id="email" required> 
+            </div>
+            <br>
+            <div>
+                <submit  class="btn btn-md btn-primary"><a class="kassBtn" href="/deleteBasket">Einkauf Abschliessen</a></button>
+            </div>
+        </form>
+    </div>
 </div>
 
-<%- await include('views/basket.ejs', { basket: basket }) %>
+<%- await include('views/basket.ejs', { basket: basket, overallPrice: overallPrice }) %>
 <%- await include('views/footer.ejs') %>

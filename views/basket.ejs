@@ -1,22 +1,25 @@
 <div id="basket" class="fixed-top pr-1" style="display: none">
-    <div class="p-4 mt-3 mb-2" onclick="BasketClose()"></div>
+    <div class="p-4 mt-3 mb-2 shopping_cart" onclick="BasketClose()"></div>
     <div class="basketModal">
         <p onclick="BasketClose()" class="m-2 pr-3 text-end BasketClose">x</p>
         <h1 class="pb-2"><b>Warenkorb</b></h1>
 
         <% for(let product of basket) { %>
+            <% overallPrice += product.price %>
             <div class="mb-3 basketProducts">
                 <h4><%= product.title %></h4>
                 <div>Anzahl: &emsp; <%= product.quantity %> &emsp; <a href="removeFromBasket&<%= product.id %>">-</a> / <a href="addToBasket&<%= product.id %>"">+</a></div>
                 <div>Preis: &emsp;&emsp; <%= product.price.toFixed(2) %></div>
-
             </div>
+
         <% } %>
 
+        <div>Total: <%= overallPrice.toFixed(2) %></div>
+        <br>
         <button class="btn btn-md btn-primary"><a class="kassBtn" href="/kasse_login">Zur Kasse</a></button>
 
         <div class="w-100">
-            <a href="/shop/killWarenkorb" onclick="javascript:return confirm('Alle Artikel im Warenkorb löschen?')" title="Warenkorb löschen" class="btn btn-md">Warenkorb löschen</a>
+            <a href="/deleteBasket" onclick="javascript:return confirm('Alle Artikel im Warenkorb löschen?')" title="Warenkorb löschen" class="btn btn-md">Warenkorb löschen</a>
         </div>
         <div class="w-100 mb-5">
             <button class="btn btn-md" onclick="BasketClose()">Weiter einkaufen</button>

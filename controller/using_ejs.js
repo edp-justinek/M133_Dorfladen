@@ -12,6 +12,7 @@ const products = readJsonSync('./assets/products.json');
 const router = new Router();
 
 let basket = [];
+let overallPrice = 0.00;
 
 router.get("/", async (context) => {
     try {
@@ -23,7 +24,7 @@ router.get("/", async (context) => {
         console.log(basket);
 
         context.response.body = await renderFileToString(Deno.cwd() + 
-        "/views/main.ejs", { product: products, basket: basket });
+        "/views/main.ejs", { product: products, basket: basket, overallPrice: overallPrice });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
@@ -74,6 +75,19 @@ router.get("/removeFromBasket&:id", async (context) => {
     }
 });
 
+router.get("/deleteBasket", async (context) => {
+    try 
+    { 
+        basket = []
+
+        await context.state.session.set("basketProducts", basket);
+
+        context.response.redirect("/");        
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 router.get("/product_detail&:id", async (context) => {
     try {
 
@@ -84,7 +98,7 @@ router.get("/product_detail&:id", async (context) => {
         } 
 
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/product_detail.ejs", { product: currentProduct, basket: basket });
+            "/views/product_detail.ejs", { product: currentProduct, basket: basket, overallPrice: overallPrice });
         context.response.type = "html";
     } catch (error) {
         console.log(error);
@@ -92,11 +106,9 @@ router.get("/product_detail&:id", async (context) => {
 });
 
 router.get("/kasse_login", async (context) => {
-    try {
-
-
+    try { 
         context.response.body = await renderFileToString(Deno.cwd() + 
-            "/views/kasse_login.ejs", { product: products, basket: basket });
+            "/views/kasse_login.ejs", { product: products, basket: basket, overallPrice: overallPrice });
         context.response.type = "html";           
     } catch (error) {
         console.log(error);
