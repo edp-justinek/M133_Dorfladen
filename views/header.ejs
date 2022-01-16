@@ -12,7 +12,7 @@
     <header>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
               <div class="container-fluid text-white">
-                <h1>Dorflädeli </h1>
+                <h1><a href="/">Dorflädeli</a></h1>
                 <img src="shopping-cart-32.png" alt="shopping-cart-icon" onclick="openBasket()">
           </nav>
     </header>
@@ -21,5 +21,6 @@
 <script>
     function openBasket() { 
         document.getElementById("basket").style.display = "block";
+        document.body.style.overflow = "hidden";
     }
 </script>

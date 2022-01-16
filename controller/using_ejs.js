@@ -34,11 +34,41 @@ router.get("/addToBasket&:id", async (context) => {
     try {
       
         let currentProduct = getSelectedProduct(context.params.id);
+        let idx = basket.findIndex(x => x.id === currentProduct.id);
+ 
+        if(idx > -1) {
+            basket[idx].quantity += 1;
+            basket[idx].price += currentProduct.specialOffer;
+            basket[idx].price = Math.round(basket[idx].price * 100) / 100
+        } else {
+            basket.push({id: currentProduct.id,title: currentProduct.productName, price: currentProduct.specialOffer, quantity: 1})
+        }
 
-        basket.push({title: currentProduct.productName, price: currentProduct.specialOffer})
         await context.state.session.set("basketProducts", basket);
 
-        context.response.redirect("/");
+        context.response.redirect("/?openBasket");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.get("/removeFromBasket&:id", async (context) => {
+    try {
+      
+        let currentProduct = getSelectedProduct(context.params.id);
+        let idx = basket.findIndex(x => x.id === currentProduct.id);
+ 
+        if(basket[idx].quantity > 1) {
+            basket[idx].quantity -= 1;
+            basket[idx].price -= currentProduct.specialOffer;
+            basket[idx].price = Math.round(basket[idx].price * 100) / 100
+        } else {
+            basket.splice(idx, 1);
+        }
+
+        await context.state.session.set("basketProducts", basket);
+
+        context.response.redirect("/?openBasket");
     } catch (error) {
         console.log(error);
     }
