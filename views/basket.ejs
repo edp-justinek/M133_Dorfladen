@@ -9,10 +9,11 @@
                 <h4><%= product.title %></h4>
                 <div>Anzahl: &emsp; <%= product.quantity %> &emsp; <a href="removeFromBasket&<%= product.id %>">-</a> / <a href="addToBasket&<%= product.id %>"">+</a></div>
                 <div>Preis: &emsp;&emsp; <%= product.price.toFixed(2) %></div>
+
             </div>
         <% } %>
 
-        <button class="btn btn-md btn-primary" onclick="">Zur Kasse</button>
+        <button class="btn btn-md btn-primary"><a class="kassBtn" href="/views/kasse_login.ejs">Zur Kasse</a></button>
 
         <div class="w-100">
             <a href="/shop/killWarenkorb" onclick="javascript:return confirm('Alle Artikel im Warenkorb löschen?')" title="Warenkorb löschen" class="btn btn-md">Warenkorb löschen</a>

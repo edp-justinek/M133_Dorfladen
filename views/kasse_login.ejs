@@ -1,0 +1,27 @@
+
+<%- await include('views/header.ejs', { title: product.productName }) %>
+
+<div>
+    <h1>Kasse - Login</h1>
+
+    <form action="">
+        <div>
+            <label for="vorname"></label>
+            <input type="text" id="vorname">
+        </div>
+        <div>
+            <label for="nachname"></label>
+            <input type="text" id="nachname">
+        </div>
+        <div>
+            <label for="email"></label>
+            <input type="email" id="email">
+        </div>
+        <div>
+            <button>Einkauf abschliessen</button>
+        </div>
+    </form>
+</div>
+
+<%- await include('views/basket.ejs', { basket: basket }) %>
+<%- await include('views/footer.ejs') %>
